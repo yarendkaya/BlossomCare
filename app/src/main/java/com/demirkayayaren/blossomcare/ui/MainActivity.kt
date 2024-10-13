@@ -2,32 +2,33 @@ package com.demirkayayaren.blossomcare.ui
 
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.ComponentActivity
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
+import androidx.activity.viewModels
 import com.demirkayayaren.blossomcare.adapter.BlossomAdapter
 import com.demirkayayaren.blossomcare.data.model.Blossom
 import com.demirkayayaren.blossomcare.data.network.NetworkResult
 import com.demirkayayaren.blossomcare.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class MainActivity : AppCompatActivity() {
+@AndroidEntryPoint
+class MainActivity : ComponentActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var viewModel: BlossomViewModel
+    private val viewModel: BlossomViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewModel = ViewModelProvider(this)[BlossomViewModel::class.java]
+
 //        viewModel.getAllBlossoms()
 //        observeBlossomResponse()
 
         viewModel.fetchResult()
         observeBlossom()
-
-
     }
 
     private fun observeBlossom() {

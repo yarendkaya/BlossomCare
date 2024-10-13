@@ -14,5 +14,5 @@ interface BlossomApi {
  suspend fun getAllBlossoms(
         @Query("key") apiKey: String = this.apiKey,
         @Query("page") page: Int = 1,
-    ): Response<BlossomResponse>
+    ): Response <BlossomResponse>
 }

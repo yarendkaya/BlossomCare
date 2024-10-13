@@ -7,11 +7,13 @@ import androidx.lifecycle.viewModelScope
 import com.demirkayayaren.blossomcare.data.model.BlossomResponse
 import com.demirkayayaren.blossomcare.data.network.NetworkResult
 import com.demirkayayaren.blossomcare.data.repository.BlossomRepository
-import com.demirkayayaren.blossomcare.data.repository.BlossomRepositoryImpl
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class BlossomViewModel : ViewModel() {
-    private val repository: BlossomRepository = BlossomRepositoryImpl()
+@HiltViewModel
+class BlossomViewModel @Inject constructor (private val repository: BlossomRepository): ViewModel() {
+
     private val _blossomResponseResponse = MutableLiveData<NetworkResult<BlossomResponse>>()
     val blossomResponse: LiveData<NetworkResult<BlossomResponse>> = _blossomResponseResponse
 
@@ -35,7 +37,6 @@ class BlossomViewModel : ViewModel() {
                 _blossomResponseResponse.value = NetworkResult.Error("İnternet bağlantısı yok!")
             }
         }
-
     }
 
 

@@ -1,12 +1,12 @@
 package com.demirkayayaren.blossomcare.data.repository
 
 import com.demirkayayaren.blossomcare.data.model.BlossomResponse
+import com.demirkayayaren.blossomcare.data.network.BlossomApi
 import com.demirkayayaren.blossomcare.data.network.NetworkResult
 import com.demirkayayaren.blossomcare.data.network.RetrofitClient
-import retrofit2.Response
 
 
-class BlossomRepositoryImpl : BlossomRepository {
+class BlossomRepositoryImpl(private val api: BlossomApi) : BlossomRepository {
     override suspend fun getAllBlossoms(): NetworkResult<BlossomResponse> {
         return try {
             val response = RetrofitClient.instance.getAllBlossoms()
@@ -16,7 +16,6 @@ class BlossomRepositoryImpl : BlossomRepository {
             } else {
                 NetworkResult.Error("Veri alınamadı")
             }
-
         } catch (e: Exception) {
             NetworkResult.Error(e.localizedMessage)
         }
