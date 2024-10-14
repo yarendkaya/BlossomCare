@@ -1,13 +1,16 @@
 package com.demirkayayaren.blossomcare.di
 
 import com.demirkayayaren.blossomcare.data.network.BlossomApi
-import com.demirkayayaren.blossomcare.data.network.RetrofitClient
+
 import com.demirkayayaren.blossomcare.data.repository.BlossomRepository
 import com.demirkayayaren.blossomcare.data.repository.BlossomRepositoryImpl
+import com.demirkayayaren.blossomcare.util.Constants.Companion.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
@@ -16,8 +19,17 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideMyApi(): BlossomApi {
-        return RetrofitClient.instance
+    fun provideRetrofit(): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideMyApi(retrofit: Retrofit): BlossomApi {
+        return retrofit.create(BlossomApi::class.java)
     }
 
     @Provides

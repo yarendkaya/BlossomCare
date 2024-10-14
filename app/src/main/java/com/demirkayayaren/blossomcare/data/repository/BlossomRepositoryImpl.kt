@@ -3,13 +3,13 @@ package com.demirkayayaren.blossomcare.data.repository
 import com.demirkayayaren.blossomcare.data.model.BlossomResponse
 import com.demirkayayaren.blossomcare.data.network.BlossomApi
 import com.demirkayayaren.blossomcare.data.network.NetworkResult
-import com.demirkayayaren.blossomcare.data.network.RetrofitClient
+import javax.inject.Inject
 
 
-class BlossomRepositoryImpl(private val api: BlossomApi) : BlossomRepository {
+class BlossomRepositoryImpl@Inject constructor(private val api: BlossomApi) : BlossomRepository {
     override suspend fun getAllBlossoms(): NetworkResult<BlossomResponse> {
         return try {
-            val response = RetrofitClient.instance.getAllBlossoms()
+            val response = api.getAllBlossoms()
             if (response.isSuccessful) {
                 val returnValue = convertToNotNullable(response.body())
                 NetworkResult.Success(returnValue)
