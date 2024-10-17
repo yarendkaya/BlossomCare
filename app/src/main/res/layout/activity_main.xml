@@ -8,13 +8,14 @@
     tools:context=".ui.MainActivity">
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvBlossomResult"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/navHostFragmentView"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:itemCount="1"
-        tools:listitem="@layout/item_blossom" />
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

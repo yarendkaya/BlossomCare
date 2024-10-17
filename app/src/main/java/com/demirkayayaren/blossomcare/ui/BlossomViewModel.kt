@@ -38,19 +38,4 @@ class BlossomViewModel @Inject constructor (private val repository: BlossomRepos
             }
         }
     }
-
-
-//    fun getAllBlossoms() {
-//        viewModelScope.launch {
-//            val response = repository.getAllBlossoms()
-//            if (response.isSuccessful) {
-//                val blossomResponse = response.body()
-//                _blossomResponseResponse.postValue(response)
-//
-//                Log.d("BlossomViewModel", "Blossom Response: $blossomResponse")
-//            } else {
-//                Log.e("BlossomViewModel", "Error: ${response.code()}")
-//            }
-//        }
-//    }
 }
