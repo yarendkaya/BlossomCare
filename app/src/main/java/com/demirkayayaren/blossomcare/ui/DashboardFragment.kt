@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.demirkayayaren.blossomcare.R
 import com.demirkayayaren.blossomcare.adapter.BlossomAdapter
 import com.demirkayayaren.blossomcare.data.model.Blossom
 import com.demirkayayaren.blossomcare.data.network.NetworkResult
@@ -60,11 +62,20 @@ class DashboardFragment : Fragment() {
 
     private fun setAdapter(data: List<Blossom>?) {
         data?.let {
-            val adapter = BlossomAdapter()
+            val adapter = BlossomAdapter { position ->
+                val bundle = Bundle().apply {
+                    putSerializable("blossom", it[position])
+                }
+                findNavController().navigate(
+                    R.id.action_dashboardFragment_to_detailFragment,
+                    bundle
+                )
+            }
             adapter.setData(it.toMutableList())
             binding.rvBlossomResult.adapter = adapter
         }
     }
+
 
 //    override fun onDestroyView() {
 //        super.onDestroyView()

@@ -18,6 +18,7 @@ navigationUiKtx = "2.8.2"
 retrofit = "2.11.0"
 kspVersion = "1.9.10-1.0.13"
 navigationFragment = "2.8.2"
+coil = "3.0.0-rc01"
 
 
 [libraries]
@@ -42,7 +43,8 @@ gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref 
 androidx-navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment", version.ref = "navigationFragment" }
 androidx-navigation-ui = { group = "androidx.navigation", name = "navigation-ui", version.ref = "navigationFragment" }
 androidx-navigation-features = { group = "androidx.navigation", name = "navigation-dynamic-features-fragment", version.ref = "navigationFragment" }
-
+coil = { group = "io.coil-kt.coil3", name = "coil", version.ref = "coil" }
+coil-network = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coil" }
 
 
 
