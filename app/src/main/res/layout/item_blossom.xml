@@ -11,21 +11,23 @@
         android:id="@+id/iv_blossom_thumb_nail"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        tools:src="@drawable/baseline_android_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/tvCommonName"
-        android:layout_width="182dp"
-        android:layout_height="29dp"
-        android:textSize="18sp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="@dimen/text_size_18sp"
+        tools:text="Blossom Name"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.758"
         app:layout_constraintStart_toEndOf="@+id/iv_blossom_thumb_nail"
         app:layout_constraintTop_toTopOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

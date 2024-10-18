@@ -34,7 +34,6 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
-
     }
 
     private fun initViews() {
@@ -46,12 +45,16 @@ class DetailFragment : Fragment() {
             binding.tvSunlight.text = it.sunlight.toString()
             binding.tvWatering.text = it.watering
             binding.ivBlossom.load(it.defaultImage.originalUrl)
-
         }
     }
 
-    fun initArgs() {
+    private fun initArgs() {
         this.blossom = arguments?.serializable<Blossom>("blossom")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

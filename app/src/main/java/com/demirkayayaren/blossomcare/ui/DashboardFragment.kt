@@ -76,10 +76,8 @@ class DashboardFragment : Fragment() {
         }
     }
 
-
-//    override fun onDestroyView() {
-//        super.onDestroyView()
-//        _binding = null // Avoid memory leaks with view binding
-//    }
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

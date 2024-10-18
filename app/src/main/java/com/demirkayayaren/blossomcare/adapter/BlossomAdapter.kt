@@ -1,5 +1,6 @@
 package com.demirkayayaren.blossomcare.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -38,15 +39,14 @@ class BlossomAdapter(private val itemClickListener: (Int) -> Unit) :
 
             itemView.setOnClickListener {
                 itemClickListener(adapterPosition)
-
             }
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setData(list: MutableList<Blossom>) {
         blossomList.clear()
         blossomList.addAll(list)
         notifyDataSetChanged()
     }
-
 }
