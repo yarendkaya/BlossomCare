@@ -74,10 +74,8 @@ dependencies {
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.androidx.navigation.features)
     implementation (libs.androidx.fragment.ktx)
-
-
-
-
+    implementation(libs.coil)
+    implementation(libs.coil.network)
 }
 
 

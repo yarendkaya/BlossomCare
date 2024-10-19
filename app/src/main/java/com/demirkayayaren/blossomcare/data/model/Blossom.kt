@@ -1,6 +1,8 @@
 package com.demirkayayaren.blossomcare.data.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
+
 
 data class Blossom(
     @SerializedName("common_name")
@@ -15,4 +17,4 @@ data class Blossom(
     val scientificName: List<String>,
     val sunlight: List<String>,
     val watering: String
-)
+): Serializable

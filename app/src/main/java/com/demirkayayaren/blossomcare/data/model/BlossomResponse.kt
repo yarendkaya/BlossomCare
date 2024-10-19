@@ -1,6 +1,5 @@
 package com.demirkayayaren.blossomcare.data.model
 
-import com.demirkayayaren.blossomcare.data.network.NetworkResult
 import com.google.gson.annotations.SerializedName
 
 data class BlossomResponse(

@@ -1,12 +1,14 @@
 package com.demirkayayaren.blossomcare.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import coil3.load
 import com.demirkayayaren.blossomcare.data.model.Blossom
 import com.demirkayayaren.blossomcare.databinding.ItemBlossomBinding
 
-class BlossomAdapter() :
+class BlossomAdapter(private val itemClickListener: (Int) -> Unit) :
     RecyclerView.Adapter<BlossomAdapter.BlossomViewHolder>() {
 
     private var blossomList: MutableList<Blossom> = mutableListOf()
@@ -33,18 +35,18 @@ class BlossomAdapter() :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(blossom: Blossom) {
             binding.tvCommonName.text = blossom.commonName
-            binding.tvSpecificName.text = blossom.scientificName.toString()
-            binding.cycle.text = blossom.cycle
-            binding.watering.text = blossom.watering
-            binding.sunlight.text = blossom.sunlight.toString()
-            binding.otherName.text = blossom.otherName.toString()
+            binding.ivBlossomThumbNail.load(blossom.defaultImage.thumbnail)
+
+            itemView.setOnClickListener {
+                itemClickListener(adapterPosition)
+            }
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setData(list: MutableList<Blossom>) {
         blossomList.clear()
         blossomList.addAll(list)
         notifyDataSetChanged()
     }
-
 }
