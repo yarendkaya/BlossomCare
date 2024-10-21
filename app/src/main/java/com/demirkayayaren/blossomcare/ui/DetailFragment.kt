@@ -1,50 +1,50 @@
 package com.demirkayayaren.blossomcare.ui
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.util.Log
 import coil3.load
 import com.demirkayayaren.blossomcare.data.model.Blossom
 import com.demirkayayaren.blossomcare.databinding.FragmentDetailBinding
+import com.demirkayayaren.blossomcare.ui.base.BaseFragment
 import com.demirkayayaren.blossomcare.util.serializable
 
 
-class DetailFragment : Fragment() {
+class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding::inflate) {
 
-    private var _binding: FragmentDetailBinding? = null
-    private val binding get() = _binding!!
+    override lateinit var viewModel: BlossomViewModel
+
     private var blossom: Blossom? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun setupUI() {
+        super.setupUI()
         initArgs()
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentDetailBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         initViews()
+
     }
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        initArgs()
+//    }
+//
+//
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//        initViews()
+//    }
 
     private fun initViews() {
+        // Safely initialize views with blossom data, if available
         blossom?.let {
-            binding.tvCommonName.text = it.commonName
-            binding.tvCycle.text = it.cycle
-            binding.tvOtherName.text = it.otherName.toString()
-            binding.tvScientificName.text = it.scientificName.toString()
-            binding.tvSunlight.text = it.sunlight.toString()
-            binding.tvWatering.text = it.watering
-            binding.ivBlossom.load(it.defaultImage.originalUrl)
+            with(binding) {
+                tvCommonName.text = it.commonName
+                tvCycle.text = it.cycle
+                tvOtherName.text = it.otherName.toString()
+                tvScientificName.text = it.scientificName.toString()
+                tvSunlight.text = it.sunlight.toString()
+                tvWatering.text = it.watering
+                ivBlossom.load(it.defaultImage.originalUrl)
+            }
+        } ?: run {
+            Log.e("DetailFragment", "No Blossom data available")
         }
     }
 
@@ -52,9 +52,8 @@ class DetailFragment : Fragment() {
         this.blossom = arguments?.serializable<Blossom>("blossom")
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
+//    override fun onDestroyView() {
+//        super.onDestroyView()
+//        _binding = null
+//    }
 }
