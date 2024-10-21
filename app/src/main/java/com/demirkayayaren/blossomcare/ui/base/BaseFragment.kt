@@ -1,7 +1,6 @@
 package com.demirkayayaren.blossomcare.ui.base
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,25 +12,21 @@ import com.demirkayayaren.blossomcare.ui.BlossomViewModel
 abstract class BaseFragment<T : ViewBinding>(private val bindingInflater: (inflater: LayoutInflater) -> T) :
     Fragment() {
 
-    private var _binding: T? = null
+    var _binding: T? = null //bundan private adını kaldırdım bu bir problem mi ?
 
     val binding: T
-        get() = _binding as T
+        get() = _binding as T// bunu neden nulla cekmem gerektiğini anlamadım
 
     abstract var viewModel: BlossomViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Initialize shared ViewModel (if required by child fragments)
         viewModel = ViewModelProvider(requireActivity()).get(BlossomViewModel::class.java)
-
     }
 
     override fun onDestroy() {
-        super.onDestroy()
-        // Log fragment destruction for debugging
-        Log.d("BaseFragment", "Fragment Destroyed: ${this::class.java.simpleName}")
+        super.onDestroy() //logu kaldırınca neden override fun silik yazıyo ?
     }
 
     override fun onCreateView(

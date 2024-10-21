@@ -1,5 +1,6 @@
 package com.demirkayayaren.blossomcare.ui
 
+import android.os.Bundle
 import android.util.Log
 import coil3.load
 import com.demirkayayaren.blossomcare.data.model.Blossom
@@ -16,23 +17,6 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
 
     override fun setupUI() {
         super.setupUI()
-        initArgs()
-        initViews()
-
-    }
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        initArgs()
-//    }
-//
-//
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        initViews()
-//    }
-
-    private fun initViews() {
-        // Safely initialize views with blossom data, if available
         blossom?.let {
             with(binding) {
                 tvCommonName.text = it.commonName
@@ -48,12 +32,15 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
         }
     }
 
-    private fun initArgs() {
-        this.blossom = arguments?.serializable<Blossom>("blossom")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            blossom = it.serializable("blossom") as? Blossom
+        }
     }
 
-//    override fun onDestroyView() {
-//        super.onDestroyView()
-//        _binding = null
-//    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

@@ -25,28 +25,6 @@ class DashboardFragment :
         setAdapter(viewModel.blossomResponse.value?.data?.blossomList)// niye yaptım bilmiyorum (chat gpt)
     }
 
-//    override fun onCreateView(
-//        inflater: LayoutInflater,
-//        container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View {
-//        // Inflate the layout for this fragment directly
-//        rootView = inflater.inflate(R.layout.fragment_dashboard, container, false)
-//
-//        // Initialize RecyclerView
-//        rvBlossomResult = rootView.findViewById(R.id.rvBlossomResult)
-//
-//        return rootView
-//    }
-
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//
-//        viewModel.fetchResult()
-//        observeBlossom()
-//
-//    }
-
     private fun observeBlossom() {
         viewModel.blossomResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
@@ -81,9 +59,9 @@ class DashboardFragment :
             binding.rvBlossomResult.adapter = adapter
         }
     }
-//
-//    override fun onDestroyView() {
-//        super.onDestroyView()
-//        _binding = null
-//    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
