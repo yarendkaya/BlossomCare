@@ -2,6 +2,7 @@ package com.demirkayayaren.blossomcare.ui
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.demirkayayaren.blossomcare.R
 import com.demirkayayaren.blossomcare.adapter.BlossomAdapter
@@ -35,6 +36,7 @@ class DashboardFragment :
 
                 is NetworkResult.Error -> {
                     Log.e("BlossomFragment", "Error: ${response.message}")
+                    handleErrorResponse()
                 }
 
                 is NetworkResult.Loading -> {
@@ -42,6 +44,10 @@ class DashboardFragment :
                 }
             }
         }
+    }
+
+    private fun handleErrorResponse() {
+        binding.imageViewError.visibility = View.VISIBLE
     }
 
     private fun setAdapter(data: List<Blossom>?) {
@@ -58,10 +64,5 @@ class DashboardFragment :
             adapter.setData(it.toMutableList())
             binding.rvBlossomResult.adapter = adapter
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

@@ -1,6 +1,5 @@
 package com.demirkayayaren.blossomcare.ui
 
-import android.os.Bundle
 import android.util.Log
 import coil3.load
 import com.demirkayayaren.blossomcare.data.model.Blossom
@@ -32,15 +31,9 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun initArgs() {
         arguments?.let {
             blossom = it.serializable("blossom") as? Blossom
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

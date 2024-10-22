@@ -12,7 +12,7 @@ import com.demirkayayaren.blossomcare.ui.BlossomViewModel
 abstract class BaseFragment<T : ViewBinding>(private val bindingInflater: (inflater: LayoutInflater) -> T) :
     Fragment() {
 
-    var _binding: T? = null //bundan private adını kaldırdım bu bir problem mi ?
+    private var _binding: T? = null //bundan private adını kaldırdım bu bir problem mi ?
 
     val binding: T
         get() = _binding as T// bunu neden nulla cekmem gerektiğini anlamadım
@@ -23,10 +23,7 @@ abstract class BaseFragment<T : ViewBinding>(private val bindingInflater: (infla
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(requireActivity()).get(BlossomViewModel::class.java)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy() //logu kaldırınca neden override fun silik yazıyo ?
+        initArgs()
     }
 
     override fun onCreateView(
@@ -35,9 +32,6 @@ abstract class BaseFragment<T : ViewBinding>(private val bindingInflater: (infla
         savedInstanceState: Bundle?
     ): View? {
         _binding = bindingInflater.invoke(inflater)
-        if (_binding == null) {
-            throw IllegalArgumentException("Binding cannot be null")
-        }
         return binding.root
     }
 
@@ -46,5 +40,13 @@ abstract class BaseFragment<T : ViewBinding>(private val bindingInflater: (infla
         setupUI()
     }
 
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
     open fun setupUI() = Unit
+
+    open fun initArgs() = Unit
 }

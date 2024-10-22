@@ -12,7 +12,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class BlossomViewModel @Inject constructor (private val repository: BlossomRepository): ViewModel() {
+class BlossomViewModel @Inject constructor(private val repository: BlossomRepository) :
+    ViewModel() {
 
     private val _blossomResponseResponse = MutableLiveData<NetworkResult<BlossomResponse>>()
     val blossomResponse: LiveData<NetworkResult<BlossomResponse>> = _blossomResponseResponse
@@ -21,20 +22,16 @@ class BlossomViewModel @Inject constructor (private val repository: BlossomRepos
     fun fetchResult() {
         _blossomResponseResponse.value = NetworkResult.Loading()
         viewModelScope.launch {
-            if (true) {
-                try {
-                    val result = repository.getAllBlossoms()
-                    if (result.data != null) {
-                        _blossomResponseResponse.postValue(NetworkResult.Success(result.data))
-                    } else {
-                        _blossomResponseResponse.value = NetworkResult.Error("Veri bulunamadı")
-                    }
-                } catch (e: Exception) {
-                    _blossomResponseResponse.value =
-                        NetworkResult.Error(e.message ?: "Bilinmeyen bir hata oluştu")
+            try {
+                val result = repository.getAllBlossoms()
+                if (result.data != null) {
+                    _blossomResponseResponse.postValue(NetworkResult.Success(result.data))
+                } else {
+                    _blossomResponseResponse.value = NetworkResult.Error("Veri bulunamadı")
                 }
-            } else {
-                _blossomResponseResponse.value = NetworkResult.Error("İnternet bağlantısı yok!")
+            } catch (e: Exception) {
+                _blossomResponseResponse.value =
+                    NetworkResult.Error(e.message ?: "Bilinmeyen bir hata oluştu")
             }
         }
     }
