@@ -2,43 +2,28 @@ package com.demirkayayaren.blossomcare.ui
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.demirkayayaren.blossomcare.R
 import com.demirkayayaren.blossomcare.adapter.BlossomAdapter
 import com.demirkayayaren.blossomcare.data.model.Blossom
 import com.demirkayayaren.blossomcare.data.network.NetworkResult
 import com.demirkayayaren.blossomcare.databinding.FragmentDashboardBinding
+import com.demirkayayaren.blossomcare.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DashboardFragment : Fragment() {
+class DashboardFragment :
+    BaseFragment<FragmentDashboardBinding>(FragmentDashboardBinding::inflate) {
 
-    private val viewModel: BlossomViewModel by viewModels()
+    override lateinit var viewModel: BlossomViewModel
 
-    private var _binding: FragmentDashboardBinding? = null
-    private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun setupUI() {
+        super.setupUI()
         viewModel.fetchResult()
         observeBlossom()
-
+        setAdapter(viewModel.blossomResponse.value?.data?.blossomList)// niye yaptım bilmiyorum (chat gpt)
     }
 
     private fun observeBlossom() {
@@ -51,6 +36,7 @@ class DashboardFragment : Fragment() {
 
                 is NetworkResult.Error -> {
                     Log.e("BlossomFragment", "Error: ${response.message}")
+                    handleErrorResponse()
                 }
 
                 is NetworkResult.Loading -> {
@@ -58,6 +44,10 @@ class DashboardFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun handleErrorResponse() {
+        binding.imageViewError.visibility = View.VISIBLE
     }
 
     private fun setAdapter(data: List<Blossom>?) {
@@ -74,10 +64,5 @@ class DashboardFragment : Fragment() {
             adapter.setData(it.toMutableList())
             binding.rvBlossomResult.adapter = adapter
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

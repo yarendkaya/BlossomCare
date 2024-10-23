@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.DashboardFragment">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -13,5 +13,17 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="1"
         tools:listitem="@layout/item_blossom" />
+
+    <TextView
+        android:id="@+id/imageViewError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:drawableTop="@drawable/ic_error"
+        android:text="@string/api_error"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:visibility="gone"
+        tools:ignore="UseCompatTextViewDrawableXml" />
 
 </FrameLayout>
