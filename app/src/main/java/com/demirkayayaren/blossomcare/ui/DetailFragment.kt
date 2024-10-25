@@ -6,8 +6,9 @@ import com.demirkayayaren.blossomcare.data.model.Blossom
 import com.demirkayayaren.blossomcare.databinding.FragmentDetailBinding
 import com.demirkayayaren.blossomcare.ui.base.BaseFragment
 import com.demirkayayaren.blossomcare.util.serializable
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding::inflate) {
 
     override lateinit var viewModel: BlossomViewModel
@@ -29,6 +30,10 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
         } ?: run {
             Log.e("DetailFragment", "No Blossom data available")
         }
+
+//        binding.fab.setOnClickListener {
+//            viewModel.saveBlossom(blossom!!)
+//        }
     }
 
     override fun initArgs() {

@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import com.demirkayayaren.blossomcare.ui.BlossomViewModel
 
+
 abstract class BaseFragment<T : ViewBinding>(private val bindingInflater: (inflater: LayoutInflater) -> T) :
     Fragment() {
 
@@ -22,7 +23,7 @@ abstract class BaseFragment<T : ViewBinding>(private val bindingInflater: (infla
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(requireActivity()).get(BlossomViewModel::class.java)
+        viewModel = ViewModelProvider(this)[BlossomViewModel::class.java]
         initArgs()
     }
 

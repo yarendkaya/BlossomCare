@@ -1,7 +1,6 @@
 package com.demirkayayaren.blossomcare.ui
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.demirkayayaren.blossomcare.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint

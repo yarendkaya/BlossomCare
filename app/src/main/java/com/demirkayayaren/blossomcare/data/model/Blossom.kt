@@ -1,10 +1,16 @@
 package com.demirkayayaren.blossomcare.data.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 
+@Entity(
+    tableName = "blossoms"
+)
 data class Blossom(
+    @PrimaryKey(autoGenerate = true)
     @SerializedName("common_name")
     val commonName: String,
     val cycle: String,

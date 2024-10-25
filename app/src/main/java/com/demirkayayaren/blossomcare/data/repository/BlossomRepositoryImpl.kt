@@ -1,12 +1,18 @@
 package com.demirkayayaren.blossomcare.data.repository
 
+import com.demirkayayaren.blossomcare.data.local.BlossomDAO
+import com.demirkayayaren.blossomcare.data.local.BlossomDatabase
+import com.demirkayayaren.blossomcare.data.model.Blossom
 import com.demirkayayaren.blossomcare.data.model.BlossomResponse
 import com.demirkayayaren.blossomcare.data.network.BlossomApi
 import com.demirkayayaren.blossomcare.data.network.NetworkResult
 import javax.inject.Inject
 
 
-class BlossomRepositoryImpl@Inject constructor(private val api: BlossomApi) : BlossomRepository {
+class BlossomRepositoryImpl @Inject constructor(
+    private val api: BlossomApi,
+    private val dao: BlossomDAO
+) : BlossomRepository {
     override suspend fun getAllBlossoms(): NetworkResult<BlossomResponse> {
         return try {
             val response = api.getAllBlossoms()
@@ -19,6 +25,18 @@ class BlossomRepositoryImpl@Inject constructor(private val api: BlossomApi) : Bl
         } catch (e: Exception) {
             NetworkResult.Error(e.localizedMessage)
         }
+    }
+
+    override suspend fun saveBlossom(blossom: Blossom) {
+        dao.upsert(blossom)
+    }
+
+    override suspend fun deleteBlossom(blossom: Blossom) {
+        dao.deleteBlossom(blossom)
+    }
+
+    override suspend fun getAllSavedBlossoms(): List<Blossom> {
+        return dao.getAllBlossoms()
     }
 
     private fun convertToNotNullable(blossomResponse: BlossomResponse?): BlossomResponse {

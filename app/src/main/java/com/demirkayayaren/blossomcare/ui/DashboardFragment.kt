@@ -18,7 +18,6 @@ class DashboardFragment :
 
     override lateinit var viewModel: BlossomViewModel
 
-
     override fun setupUI() {
         super.setupUI()
         viewModel.fetchResult()
