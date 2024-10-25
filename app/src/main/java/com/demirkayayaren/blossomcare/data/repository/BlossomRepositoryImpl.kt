@@ -1,8 +1,7 @@
 package com.demirkayayaren.blossomcare.data.repository
 
 import com.demirkayayaren.blossomcare.data.local.BlossomDAO
-import com.demirkayayaren.blossomcare.data.local.BlossomDatabase
-import com.demirkayayaren.blossomcare.data.model.Blossom
+import com.demirkayayaren.blossomcare.data.model.BlossomFav
 import com.demirkayayaren.blossomcare.data.model.BlossomResponse
 import com.demirkayayaren.blossomcare.data.network.BlossomApi
 import com.demirkayayaren.blossomcare.data.network.NetworkResult
@@ -27,15 +26,15 @@ class BlossomRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun saveBlossom(blossom: Blossom) {
+    override suspend fun saveBlossom(blossom: BlossomFav) {
         dao.upsert(blossom)
     }
 
-    override suspend fun deleteBlossom(blossom: Blossom) {
+    override suspend fun deleteBlossom(blossom: BlossomFav) {
         dao.deleteBlossom(blossom)
     }
 
-    override suspend fun getAllSavedBlossoms(): List<Blossom> {
+    override suspend fun getAllSavedBlossoms(): List<BlossomFav> {
         return dao.getAllBlossoms()
     }
 

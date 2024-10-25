@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.demirkayayaren.blossomcare.data.model.Blossom
+import com.demirkayayaren.blossomcare.data.model.BlossomFav
 import com.demirkayayaren.blossomcare.data.model.BlossomResponse
 import com.demirkayayaren.blossomcare.data.network.NetworkResult
 import com.demirkayayaren.blossomcare.data.repository.BlossomRepository
@@ -37,17 +37,19 @@ class BlossomViewModel @Inject constructor(private val repository: BlossomReposi
         }
     }
 
-    fun saveBlossom(blossom: Blossom) {
+    fun saveBlossom(blossom: BlossomFav) {
         viewModelScope.launch {
             repository.saveBlossom(blossom)
         }
     }
-    fun deleteBlossom(blossom: Blossom) {
+
+    fun deleteBlossom(blossom: BlossomFav) {
         viewModelScope.launch {
             repository.deleteBlossom(blossom)
         }
     }
-    suspend fun getAllSavedBlossoms(): List<Blossom> {
+
+    suspend fun getAllSavedBlossoms(): List<BlossomFav> {
         return repository.getAllSavedBlossoms()
     }
 }

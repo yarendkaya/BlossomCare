@@ -6,17 +6,17 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.demirkayayaren.blossomcare.data.model.Blossom
-import dagger.Binds
+import com.demirkayayaren.blossomcare.data.model.BlossomFav
 
 @Dao
 interface BlossomDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsert(blossom: Blossom): Long
+    suspend fun upsert(blossom: BlossomFav): Long
 
     @Query("SELECT * FROM blossoms")
-    suspend fun getAllBlossoms(): List<Blossom>
+    suspend fun getAllBlossoms(): List<BlossomFav>
 
     @Delete
-    suspend fun deleteBlossom(blossom: Blossom)
+    suspend fun deleteBlossom(blossom: BlossomFav)
 }

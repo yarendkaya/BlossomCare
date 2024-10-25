@@ -2,9 +2,11 @@ package com.demirkayayaren.blossomcare.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.demirkayayaren.blossomcare.data.model.Blossom
+import androidx.room.TypeConverters
+import com.demirkayayaren.blossomcare.data.model.BlossomFav
 
-@Database(entities = [Blossom::class], version = 1)
+@TypeConverters(BlossomFavConverter::class)
+@Database(entities = [BlossomFav::class], version = 1)
 abstract class BlossomDatabase : RoomDatabase() {
 
     abstract fun getBlossomDao(): BlossomDAO

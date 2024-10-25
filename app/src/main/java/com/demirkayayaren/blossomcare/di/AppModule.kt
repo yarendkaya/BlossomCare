@@ -2,19 +2,17 @@ package com.demirkayayaren.blossomcare.di
 
 import android.app.Application
 import android.content.Context
-import android.view.LayoutInflater
 import androidx.room.Room
 import com.demirkayayaren.blossomcare.data.local.BlossomDAO
 import com.demirkayayaren.blossomcare.data.local.BlossomDatabase
 import com.demirkayayaren.blossomcare.data.network.BlossomApi
-
 import com.demirkayayaren.blossomcare.data.repository.BlossomRepository
 import com.demirkayayaren.blossomcare.data.repository.BlossomRepositoryImpl
-import com.demirkayayaren.blossomcare.databinding.FragmentDetailBinding
 import com.demirkayayaren.blossomcare.util.Constants.Companion.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -47,7 +45,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideDatabase(context: Context): BlossomDatabase {
+    fun provideDatabase(@ApplicationContext context: Context): BlossomDatabase {
         return Room.databaseBuilder(
             context.applicationContext,
             BlossomDatabase::class.java,
@@ -57,7 +55,13 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideMyRepository(api: BlossomApi, db: BlossomDatabase): BlossomRepository {
-        return BlossomRepositoryImpl(api, db)
+    fun provideBlossomDao(database: BlossomDatabase): BlossomDAO {
+        return database.getBlossomDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideMyRepository(api: BlossomApi, dao: BlossomDAO): BlossomRepository {
+        return BlossomRepositoryImpl(api, dao)
     }
 }
