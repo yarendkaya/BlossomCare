@@ -39,7 +39,8 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
                 blossomFav = it.convertToBlossomFav()
                 blossomFav?.let {
                     viewModel.saveBlossom(blossomFav!!)
-                    Toast.makeText(requireContext(), "Favorilere eklendi", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Favorilere eklendi", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         }

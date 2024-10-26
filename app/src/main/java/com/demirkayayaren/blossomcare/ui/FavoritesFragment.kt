@@ -18,7 +18,7 @@ class FavoritesFragment :
 
     private fun setupObservers() {
         viewModel.favoriteBlossoms.observe(viewLifecycleOwner) { favorites ->
-            val adapter = FavoritesAdapter()
+            val adapter = FavoritesAdapter(viewModel)
             adapter.setData(favorites.toMutableList())
             binding.rvFavorites.adapter = adapter
         }

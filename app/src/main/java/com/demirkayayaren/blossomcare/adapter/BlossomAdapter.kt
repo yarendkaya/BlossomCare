@@ -38,7 +38,6 @@ class BlossomAdapter(private val itemClickListener: (Int) -> Unit) :
             binding.tvCommonName.text = blossom.commonName
             blossom.defaultImage.thumbnail?.let {
                 binding.ivBlossomThumbNail.load(blossom.defaultImage.thumbnail)
-
             }
 
             itemView.setOnClickListener {
