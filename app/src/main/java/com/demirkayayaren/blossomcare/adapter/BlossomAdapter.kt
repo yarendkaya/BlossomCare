@@ -13,6 +13,7 @@ class BlossomAdapter(private val itemClickListener: (Int) -> Unit) :
 
     private var blossomList: MutableList<Blossom> = mutableListOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BlossomViewHolder {
+
         return BlossomViewHolder(
             ItemBlossomBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -35,7 +36,10 @@ class BlossomAdapter(private val itemClickListener: (Int) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(blossom: Blossom) {
             binding.tvCommonName.text = blossom.commonName
-            binding.ivBlossomThumbNail.load(blossom.defaultImage.thumbnail)
+            blossom.defaultImage.thumbnail?.let {
+                binding.ivBlossomThumbNail.load(blossom.defaultImage.thumbnail)
+
+            }
 
             itemView.setOnClickListener {
                 itemClickListener(adapterPosition)

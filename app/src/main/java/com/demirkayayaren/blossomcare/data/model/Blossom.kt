@@ -16,4 +16,18 @@ data class Blossom(
     val scientificName: List<String>,
     val sunlight: List<String>,
     val watering: String
-): Serializable
+) : Serializable {
+    fun convertToBlossomFav(): BlossomFav {
+        return BlossomFav(
+            id = this.id,
+            commonName = this.commonName,
+            cycle = this.cycle,
+            originalUrl = this.defaultImage.toString(),
+            otherName = this.otherName,
+            scientificName = this.scientificName,
+            sunlight = this.sunlight,
+            watering = this.watering,
+            thumbNail = this.defaultImage.thumbnail
+        )
+    }
+}

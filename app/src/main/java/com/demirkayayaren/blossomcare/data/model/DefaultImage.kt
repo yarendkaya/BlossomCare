@@ -16,5 +16,5 @@ data class DefaultImage(
     val regularUrl: String,
     @SerializedName("small_url")
     val smallUrl: String,
-    val thumbnail: String
+    val thumbnail: String?
 )

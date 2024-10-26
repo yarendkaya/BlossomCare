@@ -12,9 +12,11 @@ data class BlossomFav(
     val id: Int,
     val commonName: String,
     val cycle: String,
-    val defaultImage: String,
+    val originalUrl: String,
     val otherName: List<String>,
     val scientificName: List<String>,
     val sunlight: List<String>,
-    val watering: String
-)
+    val watering: String,
+    val thumbNail:String?=null
+
+    )

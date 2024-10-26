@@ -19,6 +19,8 @@ class BlossomViewModel @Inject constructor(private val repository: BlossomReposi
     private val _blossomResponseResponse = MutableLiveData<NetworkResult<BlossomResponse>>()
     val blossomResponse: LiveData<NetworkResult<BlossomResponse>> = _blossomResponseResponse
 
+    private val _favoriteBlossoms: MutableLiveData<List<BlossomFav>> = MutableLiveData()
+    val favoriteBlossoms: LiveData<List<BlossomFav>> = _favoriteBlossoms
 
     fun fetchResult() {
         _blossomResponseResponse.value = NetworkResult.Loading()
@@ -49,7 +51,9 @@ class BlossomViewModel @Inject constructor(private val repository: BlossomReposi
         }
     }
 
-    suspend fun getAllSavedBlossoms(): List<BlossomFav> {
-        return repository.getAllSavedBlossoms()
+    fun getAllSavedBlossoms() {
+        viewModelScope.launch {
+            _favoriteBlossoms.value = repository.getAllSavedBlossoms()
+        }
     }
 }

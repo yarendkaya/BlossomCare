@@ -20,5 +20,10 @@
         android:name="com.demirkayayaren.blossomcare.ui.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" />
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.demirkayayaren.blossomcare.ui.FavoritesFragment"
+        android:label="FavoritesFragment"
+        />
 
 </navigation>
