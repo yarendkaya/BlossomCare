@@ -8,6 +8,7 @@ import com.demirkayayaren.blossomcare.data.local.BlossomDatabase
 import com.demirkayayaren.blossomcare.data.network.BlossomApi
 import com.demirkayayaren.blossomcare.data.repository.BlossomRepository
 import com.demirkayayaren.blossomcare.data.repository.BlossomRepositoryImpl
+import com.demirkayayaren.blossomcare.ui.BlossomViewModel
 import com.demirkayayaren.blossomcare.util.Constants.Companion.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -63,5 +64,10 @@ object AppModule {
     @Singleton
     fun provideMyRepository(api: BlossomApi, dao: BlossomDAO): BlossomRepository {
         return BlossomRepositoryImpl(api, dao)
+    }
+
+    fun provideMyViewModel(repository: BlossomRepository): BlossomViewModel {
+        return BlossomViewModel(repository)
+
     }
 }
